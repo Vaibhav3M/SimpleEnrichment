@@ -5,7 +5,6 @@ import com.typesafe.config.ConfigFactory;
 
 // Converted to a Singleton class
 public class Configuration {
-
     // Singleton instance
     private static Configuration singletonInstance;
 
@@ -21,8 +20,8 @@ public class Configuration {
         this.fileName = config.getString("fileName");
     }
 
-    public static Configuration getInstance() {
-
+    // Adding synchronized makes it thread safe.
+    public synchronized static Configuration getInstance() {
         // check if singleton instance not created yet
         if (singletonInstance == null) {
             singletonInstance = new Configuration();

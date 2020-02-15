@@ -33,16 +33,15 @@ public class Main {
         // Instantiate an input stream converter from factory
         FileReaderParser fileReaderParser = factory.getFileReaderParser(fileType);
 
-        // Inject the file reader parser
-		try {
-			InputSource inputSource = new InputSource(fileReaderParser, configuration.getFileName());
-			
-	        calls.stream()
-            .map(c -> new EnrichedCall(c, inputSource.query(c.getSubscriberId())))
-            .forEach(EnrichedCall::toString);
-		} catch (URISyntaxException | IOException e) {
-			e.printStackTrace();
-		}
+        // Inject the file reader parser and print results
+        try {
+            InputSource inputSource = new InputSource(fileReaderParser, configuration.getFileName());
+            calls.stream()
+                    .map(c -> new EnrichedCall(c, inputSource.query(c.getSubscriberId())))
+                    .map(EnrichedCall::toString).forEach(System.out::println);
+        } catch (URISyntaxException | IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

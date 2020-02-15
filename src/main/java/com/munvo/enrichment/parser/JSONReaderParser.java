@@ -18,7 +18,7 @@ public class JSONReaderParser implements FileReaderParser {
             JSONObject json = (JSONObject) jsonParser.parse(subLine);
 
             // Parsing values from keys
-            int id = (int) json.getOrDefault("id", 0);
+            int id = ((Long)json.getOrDefault("id", 0)).intValue();
             String name = (String) json.getOrDefault("name","name");
             String phone = (String) json.getOrDefault("phone", "phone");
 
